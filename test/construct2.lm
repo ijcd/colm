@@ -1,0 +1,14 @@
+##### LM #####
+
+lex
+	ignore /[ \t\n]+/
+	token id /[a-z]+/
+	literal `, `. `* `( `)
+end
+
+def lang [id*]
+
+print( construct lang "a b c" '\n' )
+
+##### EXP #####
+a b c

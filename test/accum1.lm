@@ -1,0 +1,36 @@
+##### LM #####
+lex
+	ignore /space+/
+	literal `* `( `)
+	token id /[a-zA-Z_]+/
+end
+
+def item 
+	[id]
+|	[`( item* `)]
+
+def start 
+	[item*]
+
+parse Input: start[ stdin ]
+
+cons Output: accum<start> []
+
+for Id: id in Input {
+	send Output
+		"( [^Id] )
+}
+
+S: start = Output()
+
+print( S )
+##### IN #####
+a b c ( chocolate fudge ) d e
+##### EXP #####
+( a )
+( b )
+( c )
+( chocolate )
+( fudge )
+( d )
+( e )
